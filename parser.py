@@ -28,7 +28,8 @@ def p_statement(p):
                  | output
                  | if_statement
                  | while_statement
-                 | for_statement'''
+                 | for_statement
+                 | declaration'''
     p[0] = p[1]
 
 def p_assignment(p):
@@ -54,7 +55,15 @@ def p_output_list(p):
 def p_expression(p):
     '''expression : term
                   | expression SOMA term
-                  | expression SUBTRACAO term'''
+                  | expression SUBTRACAO term
+                  | expression MENOR term
+                  | expression MAIOR term
+                  | expression IGUAL term
+                  | expression DIFERENTE term
+                  | expression MENOR_IGUAL term
+                  | expression MAIOR_IGUAL term
+                  | expression E term
+                  | expression OU term'''
     if len(p) == 2:
         p[0] = p[1]
     else:
@@ -74,11 +83,15 @@ def p_factor(p):
               | FLOAT
               | CHAR
               | VARIAVEL
-              | ABRE_PARENTESES expression FECHA_PARENTESES'''
+              | ABRE_PARENTESES expression FECHA_PARENTESES
+              | NEGACAO factor
+              | factor RESTO factor'''
     if len(p) == 2:
         p[0] = p[1]
+    elif len(p) == 3:
+        p[0] = ('neg', p[2])
     else:
-        p[0] = p[2]
+        p[0] = ('binop', p[2], p[1], p[3])
 
 def p_if_statement(p):
     '''if_statement : COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
@@ -96,15 +109,22 @@ def p_for_statement(p):
     '''for_statement : REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM'''
     p[0] = ('for', p[3], p[5], p[7], p[10])
 
+def p_declaration(p):
+    '''declaration : type_specifier VARIAVEL PONTO_VIRGULA'''
+    p[0] = ('declare', p[1], p[2])
+
 def p_error(p):
-    print(f"Erro de sintaxe: {p.value} na linha {p.lineno}")
+    if p:
+        print(f"Erro de sintaxe: {p.value} na linha {p.lineno}")
+    else:
+        print("Erro de sintaxe no final do arquivo")
 
 parser = yacc.yacc()
 
 def parse_file(filename):
     with open(filename, 'r') as file:
         data = file.read()
-    result = parser.parse(data)
+    result = parser.parse(data, tracking=True)
     print(result)
 
 if __name__ == "__main__":

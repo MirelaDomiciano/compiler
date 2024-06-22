@@ -5,8 +5,6 @@ tokens = [
     'INT',
     'FLOAT',
     'CHAR',
-    'INICIO',
-    'FIM',
     'ATRIBUICAO',
     'PONTO_VIRGULA',
     'ABRE_PARENTESES',
@@ -25,19 +23,26 @@ tokens = [
     'OU',
     'NEGACAO',
     'VIRGULA',
-    'PONTO',
     'RESTO',
-    'VARIAVEL',
-    'TIPO_INT',
-    'TIPO_FLOAT',
-    'TIPO_CHAR',
-    'ENTRADA',
-    'SAIDA',
-    'COND_IF',
-    'COND_ELSE',
-    'REP_DURING',
-    'REP_THROUGH'
+    'VARIAVEL'
 ]
+
+# Definição de tokens para palavras reservadas
+reserved = {
+    'start': 'INICIO',
+    'end': 'FIM',
+    'in': 'ENTRADA',
+    'out': 'SAIDA',
+    'if': 'COND_IF',
+    'else': 'COND_ELSE',
+    'during': 'REP_DURING',
+    'through': 'REP_THROUGH',
+    'int': 'TIPO_INT',
+    'float': 'TIPO_FLOAT',
+    'char': 'TIPO_CHAR'
+}
+
+tokens = tokens + list(reserved.values())
 
 # Expressões regulares para tokens simples
 t_ATRIBUICAO = r'->'
@@ -58,7 +63,6 @@ t_E = r'&&'
 t_OU = r'\|\|'
 t_NEGACAO = r'!'
 t_VIRGULA = r','
-t_PONTO = r'\.'
 t_RESTO = r'%'
 
 # Expressões regulares com ações
@@ -79,27 +83,11 @@ def t_CHAR(t):
 
 def t_VARIAVEL(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = reserved.get(t.value, 'VARIAVEL')
     return t
 
 # Ignorar espaços e tabulações
 t_ignore = ' \t'
-
-# Definição de tokens para palavras reservadas
-reserved = {
-    'start': 'INICIO',
-    'end': 'FIM',
-    'in': 'ENTRADA',
-    'out': 'SAIDA',
-    'if': 'COND_IF',
-    'else': 'COND_ELSE',
-    'during': 'REP_DURING',
-    'through': 'REP_THROUGH',
-    'int': 'TIPO_INT',
-    'float': 'TIPO_FLOAT',
-    'char': 'TIPO_CHAR'
-}
-
-tokens = tokens + list(reserved.values())
 
 def t_newline(t):
     r'\n+'
