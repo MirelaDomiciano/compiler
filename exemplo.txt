@@ -1,0 +1,21 @@
+start
+    int a -> 5;
+    float b -> 3.14;
+    char c -> "x";
+    
+    a -> a + 1;
+    b -> b * 2.5;
+    
+    in(a);
+    out(b, c);
+
+    if (a < 10) start
+        a -> a + 1;
+    end else start
+        a -> a - 1;
+    end
+
+    during (a < 15) start
+        a -> a + 1;
+    end
+end

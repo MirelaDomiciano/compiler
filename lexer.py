@@ -1,106 +1,112 @@
-# import da biblioteca ply para a construção dos tokens
 import ply.lex as lex
 
-# Tokens fornecidos
+# Lista de tokens
 tokens = [
-    'TIPO_INT', 'TIPO_FLOAT', 'TIPO_CHAR',
+    'INT',
+    'FLOAT',
+    'CHAR',
+    'INICIO',
+    'FIM',
+    'ATRIBUICAO',
+    'PONTO_VIRGULA',
+    'ABRE_PARENTESES',
+    'FECHA_PARENTESES',
+    'SOMA',
+    'SUBTRACAO',
+    'MULTIPLICACAO',
+    'DIVISAO',
+    'MENOR',
+    'MAIOR',
+    'IGUAL',
+    'DIFERENTE',
+    'MENOR_IGUAL',
+    'MAIOR_IGUAL',
+    'E',
+    'OU',
+    'NEGACAO',
+    'VIRGULA',
+    'PONTO',
+    'RESTO',
     'VARIAVEL',
-    'ATRIBUICAO', 'COLON',
-    'SOMA', 'MAISMAIS', 'SUBTRACAO', 'MENOSMENOS', 'MULTIPLICACAO', 'DIVISAO', 'RESTO',
-    'PONTO', 'PONTO_VIRGULA', 'VIRGULA',
-    'E', 'OU', 'NEGACAO',
-    'IGUAL', 'MAIOR_IGUAL', 'MENOR_IGUAL', 'MAIOR', 'MENOR', 'DIFERENTE',
-    'ABRE_PARENTESES', 'FECHA_PARENTESES',
-    'INICIO', 'FIM',
-    'ENTRADA', 'SAIDA',
-    'COND_IF', 'COND_ELSE', 'REP_DURING', 'REP_THROUGH',
-    'BLOCO_DE_COMANDO'
+    'TIPO_INT',
+    'TIPO_FLOAT',
+    'TIPO_CHAR',
+    'ENTRADA',
+    'SAIDA',
+    'COND_IF',
+    'COND_ELSE',
+    'REP_DURING',
+    'REP_THROUGH'
 ]
 
 # Expressões regulares para tokens simples
-t_ATRIBUICAO = r'<-'
-t_SOMA = r'\+'
-t_MAISMAIS = r'\+\+' 
-t_SUBTRACAO = r'-'
-t_MENOSMENOS = r'--' 
-t_MULTIPLICACAO = r'\*'
-t_DIVISAO = r'/'
-t_RESTO = r'%'
-t_E = r'&'
-t_OU = r'\|'
-t_NEGACAO = r'\#'
-t_IGUAL = r'\='
-t_MAIOR_IGUAL = r'>='
-t_MENOR_IGUAL = r'<='
-t_MAIOR = r'>'
-t_MENOR = r'<'
-t_DIFERENTE = r'\#='
+t_ATRIBUICAO = r'->'
+t_PONTO_VIRGULA = r';'
 t_ABRE_PARENTESES = r'\('
 t_FECHA_PARENTESES = r'\)'
+t_SOMA = r'\+'
+t_SUBTRACAO = r'-'
+t_MULTIPLICACAO = r'\*'
+t_DIVISAO = r'/'
+t_MENOR = r'<'
+t_MAIOR = r'>'
+t_IGUAL = r'=='
+t_DIFERENTE = r'!='
+t_MENOR_IGUAL = r'<='
+t_MAIOR_IGUAL = r'>='
+t_E = r'&&'
+t_OU = r'\|\|'
+t_NEGACAO = r'!'
 t_VIRGULA = r','
+t_PONTO = r'\.'
+t_RESTO = r'%'
 
-
-#palavras reservadas
-reserved = {
-    'int': 'TIPO_INT',
-    'float': 'TIPO_FLOAT',
-    'char': 'TIPO_CHAR',
-    'in': 'INICIO',
-    'out': 'FIM',
-    'if': 'COND_IF',
-    'else': 'COND_ELSE',
-    'through': 'REP_THROUGH',
-    'during': 'REP_DURING',
-    'start': 'INICIO',
-    'end': 'FIM'
-}
-
-#tokens com regras mais complexas
-def t_VARIAVEL(t):
-    r'[a-zA-Z][a-zA-Z0-9]*'
-    t.type = reserved.get(t.value, 'VARIAVEL')
-    return t
-
-def t_FLOAT(t):
-    r'[-]?[0-9]+\.[0-9]+'
-    t.value = float(t.value)
-    return t
-
+# Expressões regulares com ações
 def t_INT(t):
-    r'[-]?[0-9]+'
+    r'\d+'
     t.value = int(t.value)
     return t
 
-def t_CHAR(t):
-    r"\"([^\\'\n]|(\\.)|())\""
-    t.value = t.value[1:-1]
+def t_FLOAT(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
     return t
 
+def t_CHAR(t):
+    r'\'[a-zA-Z]\''
+    t.value = t.value[1]
+    return t
 
+def t_VARIAVEL(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    return t
 
-#ignorar espaços e tabulações
+# Ignorar espaços e tabulações
 t_ignore = ' \t'
 
-#definir comportamento para novas linhas (incrementar o número da linha)
+# Definição de tokens para palavras reservadas
+reserved = {
+    'start': 'INICIO',
+    'end': 'FIM',
+    'in': 'ENTRADA',
+    'out': 'SAIDA',
+    'if': 'COND_IF',
+    'else': 'COND_ELSE',
+    'during': 'REP_DURING',
+    'through': 'REP_THROUGH',
+    'int': 'TIPO_INT',
+    'float': 'TIPO_FLOAT',
+    'char': 'TIPO_CHAR'
+}
+
+tokens = tokens + list(reserved.values())
+
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-#tratar erros de caracteres ilegais
 def t_error(t):
-    print(f"Caracter ilegal '{t.value[0]}'")
+    print(f"Illegal character '{t.value[0]}'")
     t.lexer.skip(1)
 
-#construir o lexer
 lexer = lex.lex()
-
-#função para ler arquivo e tokenizar, imprimindo tokens no terminal
-def tokenize_file(filename):
-    with open(filename, 'r') as file:
-        data = file.read()
-    lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        print(tok)

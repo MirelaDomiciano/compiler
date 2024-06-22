@@ -1,0 +1,1318 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    DIFERENTE
+    E
+    IGUAL
+    MAIOR
+    MAIOR_IGUAL
+    MENOR
+    MENOR_IGUAL
+    NEGACAO
+    OU
+    PONTO
+    RESTO
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> INICIO statement_list FIM
+Rule 2     type_specifier -> TIPO_INT
+Rule 3     type_specifier -> TIPO_FLOAT
+Rule 4     type_specifier -> TIPO_CHAR
+Rule 5     statement_list -> statement
+Rule 6     statement_list -> statement_list statement
+Rule 7     statement -> assignment
+Rule 8     statement -> input
+Rule 9     statement -> output
+Rule 10    statement -> if_statement
+Rule 11    statement -> while_statement
+Rule 12    statement -> for_statement
+Rule 13    assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+Rule 14    input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+Rule 15    output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+Rule 16    output_list -> expression
+Rule 17    output_list -> output_list VIRGULA expression
+Rule 18    expression -> term
+Rule 19    expression -> expression SOMA term
+Rule 20    expression -> expression SUBTRACAO term
+Rule 21    term -> factor
+Rule 22    term -> term MULTIPLICACAO factor
+Rule 23    term -> term DIVISAO factor
+Rule 24    factor -> INT
+Rule 25    factor -> FLOAT
+Rule 26    factor -> CHAR
+Rule 27    factor -> VARIAVEL
+Rule 28    factor -> ABRE_PARENTESES expression FECHA_PARENTESES
+Rule 29    if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+Rule 30    if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+Rule 31    while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+Rule 32    for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+Terminals, with rules where they appear
+
+ABRE_PARENTESES      : 14 15 28 29 30 31 32
+ATRIBUICAO           : 13
+CHAR                 : 26
+COND_ELSE            : 30
+COND_IF              : 29 30
+DIFERENTE            : 
+DIVISAO              : 23
+E                    : 
+ENTRADA              : 14
+FECHA_PARENTESES     : 14 15 28 29 30 31 32
+FIM                  : 1 29 30 30 31 32
+FLOAT                : 25
+IGUAL                : 
+INICIO               : 1 29 30 30 31 32
+INT                  : 24
+MAIOR                : 
+MAIOR_IGUAL          : 
+MENOR                : 
+MENOR_IGUAL          : 
+MULTIPLICACAO        : 22
+NEGACAO              : 
+OU                   : 
+PONTO                : 
+PONTO_VIRGULA        : 13 14 15 32 32
+REP_DURING           : 31
+REP_THROUGH          : 32
+RESTO                : 
+SAIDA                : 15
+SOMA                 : 19
+SUBTRACAO            : 20
+TIPO_CHAR            : 4
+TIPO_FLOAT           : 3
+TIPO_INT             : 2
+VARIAVEL             : 13 14 27 32
+VIRGULA              : 17
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 7
+expression           : 13 16 17 19 20 28 29 30 31 32 32
+factor               : 21 22 23
+for_statement        : 12
+if_statement         : 10
+input                : 8
+output               : 9
+output_list          : 15 17
+program              : 0
+statement            : 5 6
+statement_list       : 1 6 29 30 30 31 32
+term                 : 18 19 20 22 23
+type_specifier       : 
+while_statement      : 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . INICIO statement_list FIM
+
+    INICIO          shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> INICIO . statement_list FIM
+    (5) statement_list -> . statement
+    (6) statement_list -> . statement_list statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement_list                 shift and go to state 3
+    statement                      shift and go to state 4
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 3
+
+    (1) program -> INICIO statement_list . FIM
+    (6) statement_list -> statement_list . statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    FIM             shift and go to state 17
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement                      shift and go to state 18
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 4
+
+    (5) statement_list -> statement .
+
+    FIM             reduce using rule 5 (statement_list -> statement .)
+    VARIAVEL        reduce using rule 5 (statement_list -> statement .)
+    ENTRADA         reduce using rule 5 (statement_list -> statement .)
+    SAIDA           reduce using rule 5 (statement_list -> statement .)
+    COND_IF         reduce using rule 5 (statement_list -> statement .)
+    REP_DURING      reduce using rule 5 (statement_list -> statement .)
+    REP_THROUGH     reduce using rule 5 (statement_list -> statement .)
+
+
+state 5
+
+    (7) statement -> assignment .
+
+    FIM             reduce using rule 7 (statement -> assignment .)
+    VARIAVEL        reduce using rule 7 (statement -> assignment .)
+    ENTRADA         reduce using rule 7 (statement -> assignment .)
+    SAIDA           reduce using rule 7 (statement -> assignment .)
+    COND_IF         reduce using rule 7 (statement -> assignment .)
+    REP_DURING      reduce using rule 7 (statement -> assignment .)
+    REP_THROUGH     reduce using rule 7 (statement -> assignment .)
+
+
+state 6
+
+    (8) statement -> input .
+
+    FIM             reduce using rule 8 (statement -> input .)
+    VARIAVEL        reduce using rule 8 (statement -> input .)
+    ENTRADA         reduce using rule 8 (statement -> input .)
+    SAIDA           reduce using rule 8 (statement -> input .)
+    COND_IF         reduce using rule 8 (statement -> input .)
+    REP_DURING      reduce using rule 8 (statement -> input .)
+    REP_THROUGH     reduce using rule 8 (statement -> input .)
+
+
+state 7
+
+    (9) statement -> output .
+
+    FIM             reduce using rule 9 (statement -> output .)
+    VARIAVEL        reduce using rule 9 (statement -> output .)
+    ENTRADA         reduce using rule 9 (statement -> output .)
+    SAIDA           reduce using rule 9 (statement -> output .)
+    COND_IF         reduce using rule 9 (statement -> output .)
+    REP_DURING      reduce using rule 9 (statement -> output .)
+    REP_THROUGH     reduce using rule 9 (statement -> output .)
+
+
+state 8
+
+    (10) statement -> if_statement .
+
+    FIM             reduce using rule 10 (statement -> if_statement .)
+    VARIAVEL        reduce using rule 10 (statement -> if_statement .)
+    ENTRADA         reduce using rule 10 (statement -> if_statement .)
+    SAIDA           reduce using rule 10 (statement -> if_statement .)
+    COND_IF         reduce using rule 10 (statement -> if_statement .)
+    REP_DURING      reduce using rule 10 (statement -> if_statement .)
+    REP_THROUGH     reduce using rule 10 (statement -> if_statement .)
+
+
+state 9
+
+    (11) statement -> while_statement .
+
+    FIM             reduce using rule 11 (statement -> while_statement .)
+    VARIAVEL        reduce using rule 11 (statement -> while_statement .)
+    ENTRADA         reduce using rule 11 (statement -> while_statement .)
+    SAIDA           reduce using rule 11 (statement -> while_statement .)
+    COND_IF         reduce using rule 11 (statement -> while_statement .)
+    REP_DURING      reduce using rule 11 (statement -> while_statement .)
+    REP_THROUGH     reduce using rule 11 (statement -> while_statement .)
+
+
+state 10
+
+    (12) statement -> for_statement .
+
+    FIM             reduce using rule 12 (statement -> for_statement .)
+    VARIAVEL        reduce using rule 12 (statement -> for_statement .)
+    ENTRADA         reduce using rule 12 (statement -> for_statement .)
+    SAIDA           reduce using rule 12 (statement -> for_statement .)
+    COND_IF         reduce using rule 12 (statement -> for_statement .)
+    REP_DURING      reduce using rule 12 (statement -> for_statement .)
+    REP_THROUGH     reduce using rule 12 (statement -> for_statement .)
+
+
+state 11
+
+    (13) assignment -> VARIAVEL . ATRIBUICAO expression PONTO_VIRGULA
+
+    ATRIBUICAO      shift and go to state 19
+
+
+state 12
+
+    (14) input -> ENTRADA . ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+
+    ABRE_PARENTESES shift and go to state 20
+
+
+state 13
+
+    (15) output -> SAIDA . ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+
+    ABRE_PARENTESES shift and go to state 21
+
+
+state 14
+
+    (29) if_statement -> COND_IF . ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> COND_IF . ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+
+    ABRE_PARENTESES shift and go to state 22
+
+
+state 15
+
+    (31) while_statement -> REP_DURING . ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+
+    ABRE_PARENTESES shift and go to state 23
+
+
+state 16
+
+    (32) for_statement -> REP_THROUGH . ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    ABRE_PARENTESES shift and go to state 24
+
+
+state 17
+
+    (1) program -> INICIO statement_list FIM .
+
+    $end            reduce using rule 1 (program -> INICIO statement_list FIM .)
+
+
+state 18
+
+    (6) statement_list -> statement_list statement .
+
+    FIM             reduce using rule 6 (statement_list -> statement_list statement .)
+    VARIAVEL        reduce using rule 6 (statement_list -> statement_list statement .)
+    ENTRADA         reduce using rule 6 (statement_list -> statement_list statement .)
+    SAIDA           reduce using rule 6 (statement_list -> statement_list statement .)
+    COND_IF         reduce using rule 6 (statement_list -> statement_list statement .)
+    REP_DURING      reduce using rule 6 (statement_list -> statement_list statement .)
+    REP_THROUGH     reduce using rule 6 (statement_list -> statement_list statement .)
+
+
+state 19
+
+    (13) assignment -> VARIAVEL ATRIBUICAO . expression PONTO_VIRGULA
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    expression                     shift and go to state 26
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 20
+
+    (14) input -> ENTRADA ABRE_PARENTESES . VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+
+    VARIAVEL        shift and go to state 33
+
+
+state 21
+
+    (15) output -> SAIDA ABRE_PARENTESES . output_list FECHA_PARENTESES PONTO_VIRGULA
+    (16) output_list -> . expression
+    (17) output_list -> . output_list VIRGULA expression
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    output_list                    shift and go to state 34
+    expression                     shift and go to state 35
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 22
+
+    (29) if_statement -> COND_IF ABRE_PARENTESES . expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> COND_IF ABRE_PARENTESES . expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    expression                     shift and go to state 36
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 23
+
+    (31) while_statement -> REP_DURING ABRE_PARENTESES . expression FECHA_PARENTESES INICIO statement_list FIM
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    expression                     shift and go to state 37
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 24
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES . VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    VARIAVEL        shift and go to state 38
+
+
+state 25
+
+    (27) factor -> VARIAVEL .
+
+    MULTIPLICACAO   reduce using rule 27 (factor -> VARIAVEL .)
+    DIVISAO         reduce using rule 27 (factor -> VARIAVEL .)
+    PONTO_VIRGULA   reduce using rule 27 (factor -> VARIAVEL .)
+    SOMA            reduce using rule 27 (factor -> VARIAVEL .)
+    SUBTRACAO       reduce using rule 27 (factor -> VARIAVEL .)
+    FECHA_PARENTESES reduce using rule 27 (factor -> VARIAVEL .)
+    VIRGULA         reduce using rule 27 (factor -> VARIAVEL .)
+
+
+state 26
+
+    (13) assignment -> VARIAVEL ATRIBUICAO expression . PONTO_VIRGULA
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    PONTO_VIRGULA   shift and go to state 39
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 27
+
+    (18) expression -> term .
+    (22) term -> term . MULTIPLICACAO factor
+    (23) term -> term . DIVISAO factor
+
+    PONTO_VIRGULA   reduce using rule 18 (expression -> term .)
+    SOMA            reduce using rule 18 (expression -> term .)
+    SUBTRACAO       reduce using rule 18 (expression -> term .)
+    FECHA_PARENTESES reduce using rule 18 (expression -> term .)
+    VIRGULA         reduce using rule 18 (expression -> term .)
+    MULTIPLICACAO   shift and go to state 42
+    DIVISAO         shift and go to state 43
+
+
+state 28
+
+    (21) term -> factor .
+
+    MULTIPLICACAO   reduce using rule 21 (term -> factor .)
+    DIVISAO         reduce using rule 21 (term -> factor .)
+    PONTO_VIRGULA   reduce using rule 21 (term -> factor .)
+    SOMA            reduce using rule 21 (term -> factor .)
+    SUBTRACAO       reduce using rule 21 (term -> factor .)
+    FECHA_PARENTESES reduce using rule 21 (term -> factor .)
+    VIRGULA         reduce using rule 21 (term -> factor .)
+
+
+state 29
+
+    (24) factor -> INT .
+
+    MULTIPLICACAO   reduce using rule 24 (factor -> INT .)
+    DIVISAO         reduce using rule 24 (factor -> INT .)
+    PONTO_VIRGULA   reduce using rule 24 (factor -> INT .)
+    SOMA            reduce using rule 24 (factor -> INT .)
+    SUBTRACAO       reduce using rule 24 (factor -> INT .)
+    FECHA_PARENTESES reduce using rule 24 (factor -> INT .)
+    VIRGULA         reduce using rule 24 (factor -> INT .)
+
+
+state 30
+
+    (25) factor -> FLOAT .
+
+    MULTIPLICACAO   reduce using rule 25 (factor -> FLOAT .)
+    DIVISAO         reduce using rule 25 (factor -> FLOAT .)
+    PONTO_VIRGULA   reduce using rule 25 (factor -> FLOAT .)
+    SOMA            reduce using rule 25 (factor -> FLOAT .)
+    SUBTRACAO       reduce using rule 25 (factor -> FLOAT .)
+    FECHA_PARENTESES reduce using rule 25 (factor -> FLOAT .)
+    VIRGULA         reduce using rule 25 (factor -> FLOAT .)
+
+
+state 31
+
+    (26) factor -> CHAR .
+
+    MULTIPLICACAO   reduce using rule 26 (factor -> CHAR .)
+    DIVISAO         reduce using rule 26 (factor -> CHAR .)
+    PONTO_VIRGULA   reduce using rule 26 (factor -> CHAR .)
+    SOMA            reduce using rule 26 (factor -> CHAR .)
+    SUBTRACAO       reduce using rule 26 (factor -> CHAR .)
+    FECHA_PARENTESES reduce using rule 26 (factor -> CHAR .)
+    VIRGULA         reduce using rule 26 (factor -> CHAR .)
+
+
+state 32
+
+    (28) factor -> ABRE_PARENTESES . expression FECHA_PARENTESES
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    expression                     shift and go to state 44
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 33
+
+    (14) input -> ENTRADA ABRE_PARENTESES VARIAVEL . FECHA_PARENTESES PONTO_VIRGULA
+
+    FECHA_PARENTESES shift and go to state 45
+
+
+state 34
+
+    (15) output -> SAIDA ABRE_PARENTESES output_list . FECHA_PARENTESES PONTO_VIRGULA
+    (17) output_list -> output_list . VIRGULA expression
+
+    FECHA_PARENTESES shift and go to state 46
+    VIRGULA         shift and go to state 47
+
+
+state 35
+
+    (16) output_list -> expression .
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    FECHA_PARENTESES reduce using rule 16 (output_list -> expression .)
+    VIRGULA         reduce using rule 16 (output_list -> expression .)
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 36
+
+    (29) if_statement -> COND_IF ABRE_PARENTESES expression . FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression . FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    FECHA_PARENTESES shift and go to state 48
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 37
+
+    (31) while_statement -> REP_DURING ABRE_PARENTESES expression . FECHA_PARENTESES INICIO statement_list FIM
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    FECHA_PARENTESES shift and go to state 49
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 38
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL . PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    PONTO_VIRGULA   shift and go to state 50
+
+
+state 39
+
+    (13) assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .
+
+    FIM             reduce using rule 13 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    VARIAVEL        reduce using rule 13 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    ENTRADA         reduce using rule 13 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    SAIDA           reduce using rule 13 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    COND_IF         reduce using rule 13 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    REP_DURING      reduce using rule 13 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    REP_THROUGH     reduce using rule 13 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+
+
+state 40
+
+    (19) expression -> expression SOMA . term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    term                           shift and go to state 51
+    factor                         shift and go to state 28
+
+state 41
+
+    (20) expression -> expression SUBTRACAO . term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    term                           shift and go to state 52
+    factor                         shift and go to state 28
+
+state 42
+
+    (22) term -> term MULTIPLICACAO . factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    factor                         shift and go to state 53
+
+state 43
+
+    (23) term -> term DIVISAO . factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    factor                         shift and go to state 54
+
+state 44
+
+    (28) factor -> ABRE_PARENTESES expression . FECHA_PARENTESES
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    FECHA_PARENTESES shift and go to state 55
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 45
+
+    (14) input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 56
+
+
+state 46
+
+    (15) output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES . PONTO_VIRGULA
+
+    PONTO_VIRGULA   shift and go to state 57
+
+
+state 47
+
+    (17) output_list -> output_list VIRGULA . expression
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    expression                     shift and go to state 58
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 48
+
+    (29) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES . INICIO statement_list FIM
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES . INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+
+    INICIO          shift and go to state 59
+
+
+state 49
+
+    (31) while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES . INICIO statement_list FIM
+
+    INICIO          shift and go to state 60
+
+
+state 50
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA . expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    expression                     shift and go to state 61
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 51
+
+    (19) expression -> expression SOMA term .
+    (22) term -> term . MULTIPLICACAO factor
+    (23) term -> term . DIVISAO factor
+
+    PONTO_VIRGULA   reduce using rule 19 (expression -> expression SOMA term .)
+    SOMA            reduce using rule 19 (expression -> expression SOMA term .)
+    SUBTRACAO       reduce using rule 19 (expression -> expression SOMA term .)
+    FECHA_PARENTESES reduce using rule 19 (expression -> expression SOMA term .)
+    VIRGULA         reduce using rule 19 (expression -> expression SOMA term .)
+    MULTIPLICACAO   shift and go to state 42
+    DIVISAO         shift and go to state 43
+
+
+state 52
+
+    (20) expression -> expression SUBTRACAO term .
+    (22) term -> term . MULTIPLICACAO factor
+    (23) term -> term . DIVISAO factor
+
+    PONTO_VIRGULA   reduce using rule 20 (expression -> expression SUBTRACAO term .)
+    SOMA            reduce using rule 20 (expression -> expression SUBTRACAO term .)
+    SUBTRACAO       reduce using rule 20 (expression -> expression SUBTRACAO term .)
+    FECHA_PARENTESES reduce using rule 20 (expression -> expression SUBTRACAO term .)
+    VIRGULA         reduce using rule 20 (expression -> expression SUBTRACAO term .)
+    MULTIPLICACAO   shift and go to state 42
+    DIVISAO         shift and go to state 43
+
+
+state 53
+
+    (22) term -> term MULTIPLICACAO factor .
+
+    MULTIPLICACAO   reduce using rule 22 (term -> term MULTIPLICACAO factor .)
+    DIVISAO         reduce using rule 22 (term -> term MULTIPLICACAO factor .)
+    PONTO_VIRGULA   reduce using rule 22 (term -> term MULTIPLICACAO factor .)
+    SOMA            reduce using rule 22 (term -> term MULTIPLICACAO factor .)
+    SUBTRACAO       reduce using rule 22 (term -> term MULTIPLICACAO factor .)
+    FECHA_PARENTESES reduce using rule 22 (term -> term MULTIPLICACAO factor .)
+    VIRGULA         reduce using rule 22 (term -> term MULTIPLICACAO factor .)
+
+
+state 54
+
+    (23) term -> term DIVISAO factor .
+
+    MULTIPLICACAO   reduce using rule 23 (term -> term DIVISAO factor .)
+    DIVISAO         reduce using rule 23 (term -> term DIVISAO factor .)
+    PONTO_VIRGULA   reduce using rule 23 (term -> term DIVISAO factor .)
+    SOMA            reduce using rule 23 (term -> term DIVISAO factor .)
+    SUBTRACAO       reduce using rule 23 (term -> term DIVISAO factor .)
+    FECHA_PARENTESES reduce using rule 23 (term -> term DIVISAO factor .)
+    VIRGULA         reduce using rule 23 (term -> term DIVISAO factor .)
+
+
+state 55
+
+    (28) factor -> ABRE_PARENTESES expression FECHA_PARENTESES .
+
+    MULTIPLICACAO   reduce using rule 28 (factor -> ABRE_PARENTESES expression FECHA_PARENTESES .)
+    DIVISAO         reduce using rule 28 (factor -> ABRE_PARENTESES expression FECHA_PARENTESES .)
+    PONTO_VIRGULA   reduce using rule 28 (factor -> ABRE_PARENTESES expression FECHA_PARENTESES .)
+    SOMA            reduce using rule 28 (factor -> ABRE_PARENTESES expression FECHA_PARENTESES .)
+    SUBTRACAO       reduce using rule 28 (factor -> ABRE_PARENTESES expression FECHA_PARENTESES .)
+    FECHA_PARENTESES reduce using rule 28 (factor -> ABRE_PARENTESES expression FECHA_PARENTESES .)
+    VIRGULA         reduce using rule 28 (factor -> ABRE_PARENTESES expression FECHA_PARENTESES .)
+
+
+state 56
+
+    (14) input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .
+
+    FIM             reduce using rule 14 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    VARIAVEL        reduce using rule 14 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    ENTRADA         reduce using rule 14 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    SAIDA           reduce using rule 14 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    COND_IF         reduce using rule 14 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    REP_DURING      reduce using rule 14 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    REP_THROUGH     reduce using rule 14 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+
+
+state 57
+
+    (15) output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .
+
+    FIM             reduce using rule 15 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    VARIAVEL        reduce using rule 15 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    ENTRADA         reduce using rule 15 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    SAIDA           reduce using rule 15 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    COND_IF         reduce using rule 15 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    REP_DURING      reduce using rule 15 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    REP_THROUGH     reduce using rule 15 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+
+
+state 58
+
+    (17) output_list -> output_list VIRGULA expression .
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    FECHA_PARENTESES reduce using rule 17 (output_list -> output_list VIRGULA expression .)
+    VIRGULA         reduce using rule 17 (output_list -> output_list VIRGULA expression .)
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 59
+
+    (29) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO . statement_list FIM
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO . statement_list FIM COND_ELSE INICIO statement_list FIM
+    (5) statement_list -> . statement
+    (6) statement_list -> . statement_list statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement_list                 shift and go to state 62
+    statement                      shift and go to state 4
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 60
+
+    (31) while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO . statement_list FIM
+    (5) statement_list -> . statement
+    (6) statement_list -> . statement_list statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement_list                 shift and go to state 63
+    statement                      shift and go to state 4
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 61
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression . PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    PONTO_VIRGULA   shift and go to state 64
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 62
+
+    (29) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list . FIM
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list . FIM COND_ELSE INICIO statement_list FIM
+    (6) statement_list -> statement_list . statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    FIM             shift and go to state 65
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement                      shift and go to state 18
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 63
+
+    (31) while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list . FIM
+    (6) statement_list -> statement_list . statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    FIM             shift and go to state 66
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement                      shift and go to state 18
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 64
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA . expression FECHA_PARENTESES INICIO statement_list FIM
+    (18) expression -> . term
+    (19) expression -> . expression SOMA term
+    (20) expression -> . expression SUBTRACAO term
+    (21) term -> . factor
+    (22) term -> . term MULTIPLICACAO factor
+    (23) term -> . term DIVISAO factor
+    (24) factor -> . INT
+    (25) factor -> . FLOAT
+    (26) factor -> . CHAR
+    (27) factor -> . VARIAVEL
+    (28) factor -> . ABRE_PARENTESES expression FECHA_PARENTESES
+
+    INT             shift and go to state 29
+    FLOAT           shift and go to state 30
+    CHAR            shift and go to state 31
+    VARIAVEL        shift and go to state 25
+    ABRE_PARENTESES shift and go to state 32
+
+    expression                     shift and go to state 67
+    term                           shift and go to state 27
+    factor                         shift and go to state 28
+
+state 65
+
+    (29) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM . COND_ELSE INICIO statement_list FIM
+
+    FIM             reduce using rule 29 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    VARIAVEL        reduce using rule 29 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    ENTRADA         reduce using rule 29 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    SAIDA           reduce using rule 29 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    COND_IF         reduce using rule 29 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    REP_DURING      reduce using rule 29 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    REP_THROUGH     reduce using rule 29 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    COND_ELSE       shift and go to state 68
+
+
+state 66
+
+    (31) while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .
+
+    FIM             reduce using rule 31 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    VARIAVEL        reduce using rule 31 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    ENTRADA         reduce using rule 31 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    SAIDA           reduce using rule 31 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    COND_IF         reduce using rule 31 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    REP_DURING      reduce using rule 31 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    REP_THROUGH     reduce using rule 31 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+
+
+state 67
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression . FECHA_PARENTESES INICIO statement_list FIM
+    (19) expression -> expression . SOMA term
+    (20) expression -> expression . SUBTRACAO term
+
+    FECHA_PARENTESES shift and go to state 69
+    SOMA            shift and go to state 40
+    SUBTRACAO       shift and go to state 41
+
+
+state 68
+
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE . INICIO statement_list FIM
+
+    INICIO          shift and go to state 70
+
+
+state 69
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES . INICIO statement_list FIM
+
+    INICIO          shift and go to state 71
+
+
+state 70
+
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO . statement_list FIM
+    (5) statement_list -> . statement
+    (6) statement_list -> . statement_list statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement_list                 shift and go to state 72
+    statement                      shift and go to state 4
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 71
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO . statement_list FIM
+    (5) statement_list -> . statement
+    (6) statement_list -> . statement_list statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement_list                 shift and go to state 73
+    statement                      shift and go to state 4
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 72
+
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list . FIM
+    (6) statement_list -> statement_list . statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    FIM             shift and go to state 74
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement                      shift and go to state 18
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 73
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list . FIM
+    (6) statement_list -> statement_list . statement
+    (7) statement -> . assignment
+    (8) statement -> . input
+    (9) statement -> . output
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) assignment -> . VARIAVEL ATRIBUICAO expression PONTO_VIRGULA
+    (14) input -> . ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA
+    (15) output -> . SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA
+    (29) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (30) if_statement -> . COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM
+    (31) while_statement -> . REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM
+    (32) for_statement -> . REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM
+
+    FIM             shift and go to state 75
+    VARIAVEL        shift and go to state 11
+    ENTRADA         shift and go to state 12
+    SAIDA           shift and go to state 13
+    COND_IF         shift and go to state 14
+    REP_DURING      shift and go to state 15
+    REP_THROUGH     shift and go to state 16
+
+    statement                      shift and go to state 18
+    assignment                     shift and go to state 5
+    input                          shift and go to state 6
+    output                         shift and go to state 7
+    if_statement                   shift and go to state 8
+    while_statement                shift and go to state 9
+    for_statement                  shift and go to state 10
+
+state 74
+
+    (30) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .
+
+    FIM             reduce using rule 30 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    VARIAVEL        reduce using rule 30 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    ENTRADA         reduce using rule 30 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    SAIDA           reduce using rule 30 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    COND_IF         reduce using rule 30 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    REP_DURING      reduce using rule 30 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    REP_THROUGH     reduce using rule 30 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+
+
+state 75
+
+    (32) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .
+
+    FIM             reduce using rule 32 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    VARIAVEL        reduce using rule 32 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    ENTRADA         reduce using rule 32 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    SAIDA           reduce using rule 32 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    COND_IF         reduce using rule 32 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    REP_DURING      reduce using rule 32 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    REP_THROUGH     reduce using rule 32 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+
