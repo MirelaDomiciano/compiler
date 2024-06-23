@@ -3,7 +3,7 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> program
-Rule 1     program -> INICIO statement_list FIM
+Rule 1     program -> INICIO_PROGRAMA statement_list FIM_PROGRAMA
 Rule 2     type_specifier -> TIPO_INT
 Rule 3     type_specifier -> TIPO_FLOAT
 Rule 4     type_specifier -> TIPO_CHAR
@@ -60,10 +60,12 @@ DIVISAO              : 32
 E                    : 28
 ENTRADA              : 15
 FECHA_PARENTESES     : 15 16 37 40 41 42 43
-FIM                  : 1 40 41 41 42 43
+FIM                  : 40 41 41 42 43
+FIM_PROGRAMA         : 1
 FLOAT                : 34
 IGUAL                : 24
-INICIO               : 1 40 41 41 42 43
+INICIO               : 40 41 41 42 43
+INICIO_PROGRAMA      : 1
 INT                  : 33
 MAIOR                : 23
 MAIOR_IGUAL          : 27
@@ -109,9 +111,9 @@ Parsing method: LALR
 state 0
 
     (0) S' -> . program
-    (1) program -> . INICIO statement_list FIM
+    (1) program -> . INICIO_PROGRAMA statement_list FIM_PROGRAMA
 
-    INICIO          shift and go to state 2
+    INICIO_PROGRAMA shift and go to state 2
 
     program                        shift and go to state 1
 
@@ -123,7 +125,7 @@ state 1
 
 state 2
 
-    (1) program -> INICIO . statement_list FIM
+    (1) program -> INICIO_PROGRAMA . statement_list FIM_PROGRAMA
     (5) statement_list -> . statement
     (6) statement_list -> . statement_list statement
     (7) statement -> . assignment
@@ -168,7 +170,7 @@ state 2
 
 state 3
 
-    (1) program -> INICIO statement_list . FIM
+    (1) program -> INICIO_PROGRAMA statement_list . FIM_PROGRAMA
     (6) statement_list -> statement_list . statement
     (7) statement -> . assignment
     (8) statement -> . input
@@ -189,7 +191,7 @@ state 3
     (3) type_specifier -> . TIPO_FLOAT
     (4) type_specifier -> . TIPO_CHAR
 
-    FIM             shift and go to state 22
+    FIM_PROGRAMA    shift and go to state 22
     VARIAVEL        shift and go to state 12
     ENTRADA         shift and go to state 13
     SAIDA           shift and go to state 14
@@ -214,7 +216,7 @@ state 4
 
     (5) statement_list -> statement .
 
-    FIM             reduce using rule 5 (statement_list -> statement .)
+    FIM_PROGRAMA    reduce using rule 5 (statement_list -> statement .)
     VARIAVEL        reduce using rule 5 (statement_list -> statement .)
     ENTRADA         reduce using rule 5 (statement_list -> statement .)
     SAIDA           reduce using rule 5 (statement_list -> statement .)
@@ -224,13 +226,14 @@ state 4
     TIPO_INT        reduce using rule 5 (statement_list -> statement .)
     TIPO_FLOAT      reduce using rule 5 (statement_list -> statement .)
     TIPO_CHAR       reduce using rule 5 (statement_list -> statement .)
+    FIM             reduce using rule 5 (statement_list -> statement .)
 
 
 state 5
 
     (7) statement -> assignment .
 
-    FIM             reduce using rule 7 (statement -> assignment .)
+    FIM_PROGRAMA    reduce using rule 7 (statement -> assignment .)
     VARIAVEL        reduce using rule 7 (statement -> assignment .)
     ENTRADA         reduce using rule 7 (statement -> assignment .)
     SAIDA           reduce using rule 7 (statement -> assignment .)
@@ -240,13 +243,14 @@ state 5
     TIPO_INT        reduce using rule 7 (statement -> assignment .)
     TIPO_FLOAT      reduce using rule 7 (statement -> assignment .)
     TIPO_CHAR       reduce using rule 7 (statement -> assignment .)
+    FIM             reduce using rule 7 (statement -> assignment .)
 
 
 state 6
 
     (8) statement -> input .
 
-    FIM             reduce using rule 8 (statement -> input .)
+    FIM_PROGRAMA    reduce using rule 8 (statement -> input .)
     VARIAVEL        reduce using rule 8 (statement -> input .)
     ENTRADA         reduce using rule 8 (statement -> input .)
     SAIDA           reduce using rule 8 (statement -> input .)
@@ -256,13 +260,14 @@ state 6
     TIPO_INT        reduce using rule 8 (statement -> input .)
     TIPO_FLOAT      reduce using rule 8 (statement -> input .)
     TIPO_CHAR       reduce using rule 8 (statement -> input .)
+    FIM             reduce using rule 8 (statement -> input .)
 
 
 state 7
 
     (9) statement -> output .
 
-    FIM             reduce using rule 9 (statement -> output .)
+    FIM_PROGRAMA    reduce using rule 9 (statement -> output .)
     VARIAVEL        reduce using rule 9 (statement -> output .)
     ENTRADA         reduce using rule 9 (statement -> output .)
     SAIDA           reduce using rule 9 (statement -> output .)
@@ -272,13 +277,14 @@ state 7
     TIPO_INT        reduce using rule 9 (statement -> output .)
     TIPO_FLOAT      reduce using rule 9 (statement -> output .)
     TIPO_CHAR       reduce using rule 9 (statement -> output .)
+    FIM             reduce using rule 9 (statement -> output .)
 
 
 state 8
 
     (10) statement -> if_statement .
 
-    FIM             reduce using rule 10 (statement -> if_statement .)
+    FIM_PROGRAMA    reduce using rule 10 (statement -> if_statement .)
     VARIAVEL        reduce using rule 10 (statement -> if_statement .)
     ENTRADA         reduce using rule 10 (statement -> if_statement .)
     SAIDA           reduce using rule 10 (statement -> if_statement .)
@@ -288,13 +294,14 @@ state 8
     TIPO_INT        reduce using rule 10 (statement -> if_statement .)
     TIPO_FLOAT      reduce using rule 10 (statement -> if_statement .)
     TIPO_CHAR       reduce using rule 10 (statement -> if_statement .)
+    FIM             reduce using rule 10 (statement -> if_statement .)
 
 
 state 9
 
     (11) statement -> while_statement .
 
-    FIM             reduce using rule 11 (statement -> while_statement .)
+    FIM_PROGRAMA    reduce using rule 11 (statement -> while_statement .)
     VARIAVEL        reduce using rule 11 (statement -> while_statement .)
     ENTRADA         reduce using rule 11 (statement -> while_statement .)
     SAIDA           reduce using rule 11 (statement -> while_statement .)
@@ -304,13 +311,14 @@ state 9
     TIPO_INT        reduce using rule 11 (statement -> while_statement .)
     TIPO_FLOAT      reduce using rule 11 (statement -> while_statement .)
     TIPO_CHAR       reduce using rule 11 (statement -> while_statement .)
+    FIM             reduce using rule 11 (statement -> while_statement .)
 
 
 state 10
 
     (12) statement -> for_statement .
 
-    FIM             reduce using rule 12 (statement -> for_statement .)
+    FIM_PROGRAMA    reduce using rule 12 (statement -> for_statement .)
     VARIAVEL        reduce using rule 12 (statement -> for_statement .)
     ENTRADA         reduce using rule 12 (statement -> for_statement .)
     SAIDA           reduce using rule 12 (statement -> for_statement .)
@@ -320,13 +328,14 @@ state 10
     TIPO_INT        reduce using rule 12 (statement -> for_statement .)
     TIPO_FLOAT      reduce using rule 12 (statement -> for_statement .)
     TIPO_CHAR       reduce using rule 12 (statement -> for_statement .)
+    FIM             reduce using rule 12 (statement -> for_statement .)
 
 
 state 11
 
     (13) statement -> declaration .
 
-    FIM             reduce using rule 13 (statement -> declaration .)
+    FIM_PROGRAMA    reduce using rule 13 (statement -> declaration .)
     VARIAVEL        reduce using rule 13 (statement -> declaration .)
     ENTRADA         reduce using rule 13 (statement -> declaration .)
     SAIDA           reduce using rule 13 (statement -> declaration .)
@@ -336,6 +345,7 @@ state 11
     TIPO_INT        reduce using rule 13 (statement -> declaration .)
     TIPO_FLOAT      reduce using rule 13 (statement -> declaration .)
     TIPO_CHAR       reduce using rule 13 (statement -> declaration .)
+    FIM             reduce using rule 13 (statement -> declaration .)
 
 
 state 12
@@ -411,16 +421,16 @@ state 21
 
 state 22
 
-    (1) program -> INICIO statement_list FIM .
+    (1) program -> INICIO_PROGRAMA statement_list FIM_PROGRAMA .
 
-    $end            reduce using rule 1 (program -> INICIO statement_list FIM .)
+    $end            reduce using rule 1 (program -> INICIO_PROGRAMA statement_list FIM_PROGRAMA .)
 
 
 state 23
 
     (6) statement_list -> statement_list statement .
 
-    FIM             reduce using rule 6 (statement_list -> statement_list statement .)
+    FIM_PROGRAMA    reduce using rule 6 (statement_list -> statement_list statement .)
     VARIAVEL        reduce using rule 6 (statement_list -> statement_list statement .)
     ENTRADA         reduce using rule 6 (statement_list -> statement_list statement .)
     SAIDA           reduce using rule 6 (statement_list -> statement_list statement .)
@@ -430,6 +440,7 @@ state 23
     TIPO_INT        reduce using rule 6 (statement_list -> statement_list statement .)
     TIPO_FLOAT      reduce using rule 6 (statement_list -> statement_list statement .)
     TIPO_CHAR       reduce using rule 6 (statement_list -> statement_list statement .)
+    FIM             reduce using rule 6 (statement_list -> statement_list statement .)
 
 
 state 24
@@ -928,7 +939,7 @@ state 46
 
     (44) declaration -> type_specifier VARIAVEL PONTO_VIRGULA .
 
-    FIM             reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
+    FIM_PROGRAMA    reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
     VARIAVEL        reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
     ENTRADA         reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
     SAIDA           reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
@@ -938,13 +949,14 @@ state 46
     TIPO_INT        reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
     TIPO_FLOAT      reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
     TIPO_CHAR       reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
+    FIM             reduce using rule 44 (declaration -> type_specifier VARIAVEL PONTO_VIRGULA .)
 
 
 state 47
 
     (14) assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .
 
-    FIM             reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    FIM_PROGRAMA    reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
     VARIAVEL        reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
     ENTRADA         reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
     SAIDA           reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
@@ -954,6 +966,7 @@ state 47
     TIPO_INT        reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
     TIPO_FLOAT      reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
     TIPO_CHAR       reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
+    FIM             reduce using rule 14 (assignment -> VARIAVEL ATRIBUICAO expression PONTO_VIRGULA .)
 
 
 state 48
@@ -1738,7 +1751,7 @@ state 83
 
     (15) input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .
 
-    FIM             reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    FIM_PROGRAMA    reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
     VARIAVEL        reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
     ENTRADA         reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
     SAIDA           reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
@@ -1748,13 +1761,14 @@ state 83
     TIPO_INT        reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
     TIPO_FLOAT      reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
     TIPO_CHAR       reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
+    FIM             reduce using rule 15 (input -> ENTRADA ABRE_PARENTESES VARIAVEL FECHA_PARENTESES PONTO_VIRGULA .)
 
 
 state 84
 
     (16) output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .
 
-    FIM             reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    FIM_PROGRAMA    reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
     VARIAVEL        reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
     ENTRADA         reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
     SAIDA           reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
@@ -1764,6 +1778,7 @@ state 84
     TIPO_INT        reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
     TIPO_FLOAT      reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
     TIPO_CHAR       reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
+    FIM             reduce using rule 16 (output -> SAIDA ABRE_PARENTESES output_list FECHA_PARENTESES PONTO_VIRGULA .)
 
 
 state 85
@@ -2042,7 +2057,7 @@ state 92
     (40) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .
     (41) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM . COND_ELSE INICIO statement_list FIM
 
-    FIM             reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    FIM_PROGRAMA    reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     VARIAVEL        reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     ENTRADA         reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     SAIDA           reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
@@ -2052,6 +2067,7 @@ state 92
     TIPO_INT        reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     TIPO_FLOAT      reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     TIPO_CHAR       reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    FIM             reduce using rule 40 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     COND_ELSE       shift and go to state 95
 
 
@@ -2059,7 +2075,7 @@ state 93
 
     (42) while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .
 
-    FIM             reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    FIM_PROGRAMA    reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     VARIAVEL        reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     ENTRADA         reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     SAIDA           reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
@@ -2069,6 +2085,7 @@ state 93
     TIPO_INT        reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     TIPO_FLOAT      reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
     TIPO_CHAR       reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
+    FIM             reduce using rule 42 (while_statement -> REP_DURING ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM .)
 
 
 state 94
@@ -2294,7 +2311,7 @@ state 101
 
     (41) if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .
 
-    FIM             reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    FIM_PROGRAMA    reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
     VARIAVEL        reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
     ENTRADA         reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
     SAIDA           reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
@@ -2304,13 +2321,14 @@ state 101
     TIPO_INT        reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
     TIPO_FLOAT      reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
     TIPO_CHAR       reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
+    FIM             reduce using rule 41 (if_statement -> COND_IF ABRE_PARENTESES expression FECHA_PARENTESES INICIO statement_list FIM COND_ELSE INICIO statement_list FIM .)
 
 
 state 102
 
     (43) for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .
 
-    FIM             reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    FIM_PROGRAMA    reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
     VARIAVEL        reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
     ENTRADA         reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
     SAIDA           reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
@@ -2320,6 +2338,7 @@ state 102
     TIPO_INT        reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
     TIPO_FLOAT      reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
     TIPO_CHAR       reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
+    FIM             reduce using rule 43 (for_statement -> REP_THROUGH ABRE_PARENTESES VARIAVEL PONTO_VIRGULA expression PONTO_VIRGULA expression FECHA_PARENTESES INICIO statement_list FIM .)
 
 WARNING: 
 WARNING: Conflicts:

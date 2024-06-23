@@ -1,0 +1,1 @@
+('program', [('declare', 'int', 'a'), ('assign', 'a', 10), ('if-else', ('binop', '<', 'a', 20), [('assign', 'a', ('binop', '+', 'a', 1))], [('assign', 'a', ('binop', '-', 'a', 1))]), ('while', ('binop', '<', 'a', 30), [('assign', 'a', ('binop', '+', 'a', 2))])])

@@ -29,6 +29,8 @@ tokens = [
 
 # Definição de tokens para palavras reservadas
 reserved = {
+    'startProgram': 'INICIO_PROGRAMA',
+    'endProgram': 'FIM_PROGRAMA',
     'start': 'INICIO',
     'end': 'FIM',
     'in': 'ENTRADA',
@@ -98,3 +100,22 @@ def t_error(t):
     t.lexer.skip(1)
 
 lexer = lex.lex()
+
+def tokenize_file(filename):
+    with open(filename, 'r') as file:
+        data = file.read()
+    lexer.input(data)
+    tokens = []
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        tokens.append(tok)
+    return tokens
+
+# Testar a tokenização diretamente no arquivo lexer.py (opcional)
+if __name__ == "__main__":
+    # Substitua 'arquivo_de_teste.pin' pelo caminho do arquivo que deseja testar
+    tokens = tokenize_file('exemplo.txt')
+    for token in tokens:
+        print(token)

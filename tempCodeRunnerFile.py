@@ -5,27 +5,12 @@ def translate_to_python(command_descriptions, filename, output_folder_py):
     translated_code = ""
     array_of_atribs = []
     indent_level = 0
-    program_started = False
 
     for command in command_descriptions:
-        if command == "INICIO_PROGRAMA":
-            program_started = True
-            continue
-        elif command == "FIM_PROGRAMA":
-            break
-
-        if not program_started:
-            continue
-
-        if "INICIO" in command and command != "INICIO_PROGRAMA":
-            indent_level += 1
+        if "INICIO" in command or "FIM" in command:
             continue
         
-        elif "FIM" in command and command != "FIM_PROGRAMA":
-            indent_level -= 1
-            continue
-
-        if "REP_DURING" in command:
+        elif "REP_DURING" in command:
             condition = command.split("=>")[1].strip()
             if "CONDICAO" in condition:
                 condition = condition.replace("CONDICAO ", "").strip()
@@ -43,9 +28,7 @@ def translate_to_python(command_descriptions, filename, output_folder_py):
             translated_code += "    " * indent_level + f"if {condition}:\n"
         
         elif "COND_ELSE" in command:
-            indent_level -= 1
             translated_code += "    " * indent_level + "else:\n"
-            indent_level += 1
         
         elif "ATRIBUICAO" in command:
             assignment = command.replace("ATRIBUICAO => ", "").strip()
@@ -67,7 +50,6 @@ def translate_to_python(command_descriptions, filename, output_folder_py):
         elif "COMPARACAO" in command:
             comparison = command.split("=>")[1].strip()
             translated_code += "    " * indent_level + f"if {comparison}:\n"
-            indent_level += 1
         
         elif "ENTRADA" in command:
             var_name = command.split("ENTRADA")[1].strip()
@@ -86,16 +68,10 @@ def translate_to_python(command_descriptions, filename, output_folder_py):
 
 if __name__ == "__main__":
     example_commands = [
-        "INICIO_PROGRAMA",
+        "INICIO",
         "ATRIBUICAO => x : 5",
         "COND_IF => CONDICAO x == 5",
-        "INICIO",
         "ATRIBUICAO => y : 10",
-        "FIM",
-        "COND_ELSE",
-        "INICIO",
-        "ATRIBUICAO => y : 20",
-        "FIM",
-        "FIM_PROGRAMA"
+        "FIM"
     ]
     translate_to_python(example_commands, "output.py", ".")

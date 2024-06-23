@@ -5,7 +5,7 @@ import os
 # Regras gramaticais
 
 def p_program(p):
-    '''program : INICIO statement_list FIM'''
+    '''program : INICIO_PROGRAMA statement_list FIM_PROGRAMA'''
     p[0] = ('program', p[2])
 
 def p_type_specifier(p):
@@ -121,14 +121,20 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-def parse_file(filename):
-    with open(filename, 'r') as file:
+def parse_data(data):
+    result = parser.parse(data, tracking=True)
+    return result
+
+def parse_file(input_filename, output_filename):
+    with open(input_filename, 'r') as file:
         data = file.read()
     result = parser.parse(data, tracking=True)
-    print(result)
+    with open(output_filename, 'w') as outfile:
+        outfile.write(str(result))
 
 if __name__ == "__main__":
     # Obtém o caminho absoluto do arquivo
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, 'exemplo.txt')
-    parse_file(file_path)
+    input_file_path = os.path.join(base_dir, 'exemplo.txt')
+    output_file_path = os.path.join(base_dir, 'parsed_output.txt')
+    parse_file(input_file_path, output_file_path)
