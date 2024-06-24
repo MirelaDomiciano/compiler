@@ -29,33 +29,19 @@ all_files = os.listdir(path)
 def is_lagartixa_file(filename):
     return filename.endswith('.tixa')
 
-#para cada arquivo, tokeniza e faz o parsing
 for filename in all_files:
     file_path = os.path.join(path, filename)
     
     if is_lagartixa_file(filename):
-        #diz qual arquivo está sendo compilado, que é o arquivo que está sendo tokenizado e parseado
         print(f"Compilando arquivo: {file_path}\n")
 
-        # Tokenize o arquivo
         tokens = tokenize_file(file_path)
         print("Tokens:", tokens)
-
-        # Parse o arquivo
-        parse_output_file_txt = os.path.join(folder_txt , filename.replace('.tixa', '.txt'))
-        parse_output_file_py = os.path.join(folder_py, filename.replace('.tixa', '.py'))
-        parse_file(file_path, parse_output_file_txt)
-
-        # Carregar comandos do arquivo parseado
-        with open(parse_output_file_txt, 'r') as parsed_file:
-            command_descriptions = parsed_file.readlines()
-
-        # Traduzir comandos para Python
-        translate_to_python(command_descriptions, filename.replace('.tixa', '.py'), folder_py)
-        print("\n")
+        
+        parse_file(file_path, folder_txt, folder_py)
 
     else:
-        print(f"Erro: O arquivo '{filename}' não possui a extensão .tixa e não será processado.\n")
+        print(f"Erro: O arquivo não possui a extensão .tixa \n")
 
 # Gera executáveis para os scripts Python gerados
 generate_executables(folder_py, folder_spec, folder_exe)

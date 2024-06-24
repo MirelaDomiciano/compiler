@@ -1,5 +1,6 @@
 import ply.yacc as yacc
 from lexer import tokens
+from myTranslator import translate_to_python
 import os
 
 # Regras gramaticais
@@ -121,20 +122,29 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-def parse_data(data):
-    result = parser.parse(data, tracking=True)
-    return result
 
-def parse_file(input_filename, output_filename):
+def parse_file(input_filename, folder_txt, folder_py):
+    global command_descriptions
+
+    without_extension = os.path.splitext(input_filename)[0]
+    out_filename = os.path.join(folder_txt, without_extension + '_commands.txt')
+
     with open(input_filename, 'r') as file:
         data = file.read()
-    result = parser.parse(data, tracking=True)
-    with open(output_filename, 'w') as outfile:
-        outfile.write(str(result))
 
-if __name__ == "__main__":
-    # Obtém o caminho absoluto do arquivo
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    input_file_path = os.path.join(base_dir, 'exemplo.txt')
-    output_file_path = os.path.join(base_dir, 'parsed_output.txt')
-    parse_file(input_file_path, output_file_path)
+    command_descriptions = []
+
+    parser.parse(data)
+
+    with open(out_filename, 'w') as out_file:
+        for des in command_descriptions:
+            if isinstance(des, list):
+                for cmd in des:
+                    out_file.write(cmd + '\n')
+                    print(cmd)
+            else:
+                out_file.write(des + '\n')
+                print(des)
+                
+    print("Arquivo de comandos gerado com sucesso!")
+    translate_to_python(command_descriptions, input_filename, folder_py)
