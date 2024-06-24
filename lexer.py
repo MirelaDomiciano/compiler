@@ -1,11 +1,11 @@
 import ply.lex as lex
-import os
 
 # Lista de tokens
 tokens = [
     'INT',
     'FLOAT',
     'CHAR',
+    'STRING',
     'ATRIBUICAO',
     'PONTO_VIRGULA',
     'ABRE_PARENTESES',
@@ -39,7 +39,6 @@ reserved = {
     'if': 'COND_IF',
     'else': 'COND_ELSE',
     'during': 'REP_DURING',
-    'through': 'REP_THROUGH',
     'int': 'TIPO_INT',
     'float': 'TIPO_FLOAT',
     'char': 'TIPO_CHAR'
@@ -84,6 +83,11 @@ def t_CHAR(t):
     t.value = t.value[1]
     return t
 
+def t_STRING(t):
+    r'\"([^\\\n]|(\\.))*?\"'
+    t.value = str(t.value)
+    return t
+
 def t_VARIAVEL(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'VARIAVEL')
@@ -106,18 +110,21 @@ def tokenize_file(filename):
     with open(filename, 'r') as file:
         data = file.read()
     lexer.input(data)
-    tokens = []
+    all_tokens = []
     while True:
-        tok = lexer.token()
-        if not tok:
+        mytoken = lexer.token()
+        if not mytoken:
             break
-        tokens.append(tok)
-    return tokens
+        print(mytoken)
+        all_tokens.append(mytoken)
+    return all_tokens
 
-# Testar a tokenização diretamente no arquivo lexer.py (opcional)
 if __name__ == "__main__":
+    import os
     base_dir = os.path.dirname(os.path.abspath(__file__))
     input_file_path = os.path.join(base_dir, 'exemplo.txt')
     tokens = tokenize_file(input_file_path)
+    print("Tokens:")
     for token in tokens:
-        print(token)
+        print(token)    
+    print("Fim dos tokens")
