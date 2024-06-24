@@ -1,0 +1,32 @@
+startProgram
+    int num -> 10;
+
+    out("Digite um número: ");
+    in(num);
+
+    int divisor -> 2;
+    int primo -> 1;
+
+    during (divisor < num)
+    start
+        if (num % divisor == 0)
+        start
+            primo -> 0;
+            divisor -> divisor + 1;
+            break;
+        end
+        else
+        start
+            divisor -> divisor + 1;
+        end
+    end
+
+    if (primo == 1)
+    start
+        out(num, " é primo");
+    end
+    else
+    start
+        out(num, " não é primo");
+    end
+endProgram

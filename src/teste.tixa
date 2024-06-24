@@ -1,8 +1,0 @@
-startProgram
-    int b -> 0;
-    during (b < 30) 
-    start
-        b -> b + 2;
-        out("Pares", b);
-    end
-endProgram

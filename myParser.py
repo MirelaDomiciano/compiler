@@ -147,8 +147,8 @@ def parse_file(input_filename, folder_txt, folder_py):
                 assignment = line.replace("int ", "").replace("float ", "").replace("char ", "").replace("string ", "")
                 command_descriptions.append(f"ATRIBUICAO => {assignment.replace('=', '->')}")
             elif line.startswith("in"):
-                var_name = line.split( )[1]
-                command_descriptions.append(f"ENTRADA {var_name}")
+                var = line.split("(")[1].split(")")[0]
+                command_descriptions.append(f"ENTRADA {var}")
             elif line.startswith("out"):
                 var = line.split("(")[1].split(")")[0]
                 command_descriptions.append(f"SAIDA {var}")

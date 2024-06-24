@@ -51,15 +51,16 @@ def translate_to_python(command_descriptions, filename, output_folder_py):
             translated_code += "    " * indent_level + f"{expression}\n"
         
         elif "COMPARACAO" in command:
-            comparison = command.split("=>")[1].strip()
-            translated_code += "    " * indent_level + f"if {comparison}:\n"
+           comparison = command.split("=>")[1].strip()
+           translated_code += "    " * indent_level + f"if {comparison}:\n"
+
         
         elif "ENTRADA" in command:
             var_name = command.split("ENTRADA")[1].strip()
             if var_name in array_of_atribs:
-                translated_code += "    " * indent_level + f"{var_name} = int(input())\n"
+                translated_code += "    " * indent_level + f"{var_name} = int(input({''}))\n"
             else:
-                translated_code += "    " * indent_level + f"{var_name} = input()\n"
+                translated_code += "    " * indent_level + f"{var_name} = input({''})\n"
         
         elif "SAIDA" in command:
             output_vars = command.split("SAIDA")[1].strip()
