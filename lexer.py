@@ -1,4 +1,5 @@
 import ply.lex as lex
+import os
 
 # Lista de tokens
 tokens = [
@@ -115,7 +116,8 @@ def tokenize_file(filename):
 
 # Testar a tokenização diretamente no arquivo lexer.py (opcional)
 if __name__ == "__main__":
-    # Substitua 'arquivo_de_teste.pin' pelo caminho do arquivo que deseja testar
-    tokens = tokenize_file('exemplo.txt')
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    input_file_path = os.path.join(base_dir, 'exemplo.txt')
+    tokens = tokenize_file(input_file_path)
     for token in tokens:
         print(token)

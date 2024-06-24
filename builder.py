@@ -4,14 +4,6 @@ import shutil
 import subprocess
 
 def build_executable(script, spec_path, dist_path):
-    '''
-    Gera um executável para o script Python especificado usando PyInstaller.
-
-    Args:
-    - script (str): Caminho completo para o script Python.
-    - spec_path (str): Caminho para o diretório onde o arquivo .spec será colocado.
-    - dist_path (str): Caminho para o diretório onde a pasta de distribuição será criada.
-    '''
     #obtém o caminho absoluto para o script e a pasta de distribuição personalizada 'output_exe'
     script_path = os.path.abspath(script)
     spec_file = os.path.join(spec_path, os.path.basename(script).replace('.py', '.spec'))
@@ -32,22 +24,15 @@ def build_executable(script, spec_path, dist_path):
         if os.path.exists(spec_file):
             os.remove(spec_file)
             print(f"Arquivo .spec {spec_file} removido com sucesso.")
-            
-        shutil.rmtree('output_spec/')
+        spec_dir = os.path.dirname(os.path.abspath(__file__))
+        folder_spec = os.path.join(spec_dir, 'output_spec/') 
+        shutil.rmtree(folder_spec)
         
     except subprocess.CalledProcessError as e:
         #exibe uma mensagem de erro se a geração do executável falhar
         print(f"Erro ao gerar executável para {script}: {e}")
 
 def generate_executables(scripts_folder, spec_folder, dist_folder_name):
-    '''
-    Itera sobre todos os arquivos .py na pasta especificada e gera executáveis para cada um.
-
-    Args:
-    - scripts_folder (str): Caminho para a pasta onde os scripts Python estão localizados.
-    - spec_folder (str): Caminho para o diretório onde os arquivos .spec serão colocados.
-    - dist_folder_name (str): Nome da pasta onde a pasta de distribuição será criada.
-    '''
     
     #obtém o caminho completo para a pasta de scripts e a pasta de distribuição
     dist_path = os.path.join(os.getcwd(), dist_folder_name)

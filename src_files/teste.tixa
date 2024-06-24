@@ -1,0 +1,13 @@
+startProgram
+    int a;
+    a -> 10;
+    if (a < 20) start
+        a -> a + 1;
+    end
+    else start
+        a -> a - 1;
+    end
+    during (a < 30) start
+        a -> a + 2;
+    end
+endProgram
