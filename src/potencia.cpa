@@ -1,0 +1,11 @@
+startProgram
+    int p1 -> 2;
+    int n -> 10;
+    int count -> 1;
+    during (count <= n) 
+    start
+        out("2 elevado a ", count, " = ", p1);
+        p1 -> p1 * 2;
+        count -> count + 1;
+    end
+endProgram

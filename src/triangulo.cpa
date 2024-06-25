@@ -1,0 +1,34 @@
+startProgram
+    int a -> 0;
+    int b -> 0;
+    int c -> 0;
+    out("Entre com os valores dos lados: ");
+    out("Lado a: ");
+    in(a);
+    out("Lado b: ");
+    in(b);
+    out("Lado c: ");
+    in(c);
+    if (a < b + c) 
+    start
+        if (b < a + c)
+        start
+            if (c < a + b)
+            start 
+                out("eh triangulo");
+            end
+            else 
+            start 
+                out("nao eh triangulo")
+            end
+        end
+        else 
+        start 
+            out("nao eh triangulo")
+        end
+    end
+    else 
+    start
+        out("nao eh triangulo");
+    end
+endProgram
