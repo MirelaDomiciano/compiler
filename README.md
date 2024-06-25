@@ -40,4 +40,5 @@ Como output o programa gera um arquivo .txt na pasta files_txt para cada exemplo
 ## Referências:
 
 [Documentação Ply Python](https://ply.readthedocs.io/en/latest)
+
 [Mais informações](https://www.dabeaz.com/ply/ply.html)
