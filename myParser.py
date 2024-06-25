@@ -159,17 +159,17 @@ def parse_file(input_filename, folder_txt, folder_py):
             else:
                 command_descriptions.append(f"EXPRESSAO => {line}")
 
-    output_py = os.path.join(folder_py, os.path.basename(input_filename).replace(".tixa", ".py"))
+    output_py = os.path.join(folder_py, os.path.basename(input_filename).replace(".cpa", ".py"))
     translate_to_python(command_descriptions, output_py, folder_py)
 
     # Escreve os comandos parseados em um arquivo de saída .txt
-    output_file_txt = os.path.join(folder_txt, os.path.basename(input_filename).replace(".tixa", ".txt"))
+    output_file_txt = os.path.join(folder_txt, os.path.basename(input_filename).replace(".cpa", ".txt"))
     with open(output_file_txt, 'w') as file:
         for command in command_descriptions:
             file.write(command + "\n")
 
-def examples_tixa(filename):
-    return filename.endswith('.tixa')
+def examples_cpa(filename):
+    return filename.endswith('.cpa')
 
 if __name__ == "__main__":
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     
         file_path = os.path.join(src_folder, filename)
     
-        if examples_tixa(filename):
+        if examples_cpa(filename):
         
             parse_file(file_path, folder_txt, folder_py)
             print("\n")
