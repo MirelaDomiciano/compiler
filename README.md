@@ -28,6 +28,7 @@ Instalação oficial: [documentação oficial do Python](https://python.org.br/i
 
 ### ply.lex e ply.yacc
 Para utilização dessas ferramentas é necessários instalar a biblioteca ply, pode-se usar o comando abaixo:
+
     ```
     pip install ply
     ```
@@ -35,6 +36,7 @@ Para utilização dessas ferramentas é necessários instalar a biblioteca ply, 
 ## Como Executar
 
 Com essas dependências instaladas já é possível rodar o programa. Para isso execute o programa myParser.py:
+
     ```
     python3 myParser.py    
     ```
