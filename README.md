@@ -8,16 +8,16 @@ Este projeto é um trabalho da matéria de compiladores que tem por objetivo imp
 
 O componente `lexer` é responsável pela análise léxica do código-fonte. A biblioteca `ply.lex` é utilizada para definir os tokens da linguagem e as regras para a análise léxica. Tokens são especificados através de expressões regulares, e a biblioteca gera um analisador léxico que pode identificar esses tokens no código-fonte. No lexer são definidos os elementos básicos da linguagem, como palavras-chave, identificadores, operadores, etc. 
 
-
 ### Parser (`myParser.py`)
 
-O `myParser` é o componente que realiza a análise sintática. Ele constrói a árvore sintática do programa a partir dos tokens identificados pelo lexer. Utiliza a biblioteca `ply.yacc` permite especificar a gramática de forma declarativa, usando docstrings Python para definir as regras de produção. A biblioteca gera um parser que pode construir a árvore sintática do programa com base na gramática definida.. O parser também define a precedência dos operadores para resolver ambiguidades na gramática.
+O `myParser` é o componente que realiza a análise sintática. Ele constrói a árvore sintática do programa a partir dos tokens identificados pelo lexer. Utiliza a biblioteca `ply.yacc` permite especificar a gramática de forma declarativa, usando docstrings Python para definir as regras de produção. A biblioteca gera um parser que pode construir a árvore sintática do programa com base na gramática definida. O parser também define a precedência dos operadores para resolver ambiguidades na gramática.
 
-### Translator (`myTranslator.py`
+### Translator (`myTranslator.py`)
 
 O `myTranslator` é responsável por traduzir a árvore sintática gerada pelo parser em código Python. Este componente implementa a lógica de tradução, visitando cada nó da árvore sintática e gerando o código correspondente em Python.
 
 ## Instalações
+
 ###Python
 Instalação oficial: [documentação oficial do Python](https://python.org.br/instalacao-windows/).
 
