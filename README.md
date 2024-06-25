@@ -37,4 +37,7 @@ Com essas dependências instaladas já é possível rodar o programa. Para isso 
 ## Output do programa 
 Como output o programa gera um arquivo .txt na pasta files_txt para cada exemplo presente na pasta src. Esse arquivo contem a descrição dos comandos de cada um dos exemplos. Além disso, também é gerado um arquivo .py para na pasta files_py para cada um dos exemplos, esses arquivos são a tradução dos exemplos para a linguagem Python. Esses arquivos somente são gerados para os exemplos que contém a extensão .cpa, que é a extensão para os arquivos da nossa linguagem CPython. 
 
+## Referências:
 
+[Documentação Ply Python](https://ply.readthedocs.io/en/latest)
+[Mais informações](https://www.dabeaz.com/ply/ply.html)
