@@ -5,7 +5,7 @@ Este projeto é um trabalho da matéria de compiladores que tem por objetivo imp
 ## Grupo
 1. Júlia Pivato de Oliveira
 2. Mirela Vitória Domiciano
-3. Gabriel
+3. Gabriel Tauchen Filgueiras
 
 ## Componentes
 
