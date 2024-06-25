@@ -18,17 +18,16 @@ O `myTranslator` é responsável por traduzir a árvore sintática gerada pelo p
 
 ## Instalações
 
-###Python
+### Python
 Instalação oficial: [documentação oficial do Python](https://python.org.br/instalacao-windows/).
 
 ### ply.lex e ply.yacc
 Para utilização dessas ferramentas é necessários instalar a biblioteca ply, pode-se usar o comando abaixo:
-[`pip install ply`]
-
+[`pip install ply`](command:_github.copilot.openSymbolFromReferences?%5B%7B%22%24mid%22%3A1%2C%22path%22%3A%22%2Fusr%2Flib%2Fpython3%2Fdist-packages%2Fply%2F__init__.py%22%2C%22scheme%22%3A%22file%22%7D%2C%7B%22line%22%3A0%2C%22character%22%3A0%7D%5D "../../../../../../../usr/lib/python3/dist-packages/ply/__init__.py")
 ## Como Executar
 
 Com essas dependências instaladas já é possível rodar o programa. Para isso execute o programa myParser.py:
-[`python3 myParser.py`]
+[`python3 myParser.py`](command:_github.copilot.openSymbolFromReferences?%5B%7B%22%24mid%22%3A1%2C%22path%22%3A%22%2Fusr%2Flib%2Fpython3%2Fdist-packages%2Fply%2F__init__.py%22%2C%22scheme%22%3A%22file%22%7D%2C%7B%22line%22%3A0%2C%22character%22%3A0%7D%5D "../../../../../../../usr/lib/python3/dist-packages/ply/__init__.py")
 
 ## Output do programa 
 Como output o programa gera um arquivo .txt na pasta files_txt para cada exemplo presente na pasta src. Esse arquivo contem a descrição dos comandos de cada um dos exemplos. Além disso, também é gerado um arquivo .py para na pasta files_py para cada um dos exemplos, esses arquivos são a tradução dos exemplos para a linguagem Python. Esses arquivos somente são gerados para os exemplos que contém a extensão .cpa, que é a extensão para os arquivos da nossa linguagem CPython. 
