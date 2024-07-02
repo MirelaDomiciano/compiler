@@ -2,11 +2,6 @@
 
 Este projeto é um trabalho da matéria de compiladores que tem por objetivo implementar um analisador léxico e um analisador sintático para a linguagem de programação CêPy. A linguagem em questão foi desenvolvida com usando como base tanto a linguagem C quanto a linguagem Python e também adicionando algumas partes autênticas. O projeto se trata de um compilador simples desenvolvido em Python, utilizando as bibliotecas `ply.lex` e `ply.yacc` para análise léxica e sintática, respectivamente. O projeto é dividido em três componentes principais: `lexer`, `myParser`, e `myTranslator`.
 
-## Grupo
-1. Júlia Pivato de Oliveira
-2. Mirela Vitória Domiciano
-3. Gabriel Tauchen Filgueiras
-
 ## Componentes
 
 ### Lexer (`lexer.py`)
